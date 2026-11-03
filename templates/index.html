@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio | PlayStart{% endblock %}
+
+{% block content %}
+<style>
+    /* ESTILOS DE EMERGENCIA PARA FORZAR EL TAMAÑO VERTICAL Y EVITAR DESBORDAMIENTOS */
+    .game-card {
+        background: var(--bg-card, #161c28) !important;
+        border-radius: 8px !important;
+        border: 1px solid var(--border-subtle, #20293a) !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+    }
+
+    .game-card .img-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        height: 280px !important;     /* Altura fija estilo póster */
+        max-height: 280px !important;
+        overflow: hidden !important;  /* Corta cualquier parte que sobresalga */
+        background: #000 !important;
+    }
+
+    .game-card img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;     /* Rellena el recuadro recortando proporciones sin deformar */
+        object-position: center !important;
+        display: block !important;
+    }
+
+    .game-card:hover img {
+        transform: scale(1.05);
+        transition: transform 0.25s ease;
+    }
+</style>
+
+<main>
+    <section style="padding: 60px 0; text-align: center; border-bottom: 1px solid var(--border-subtle); margin-bottom: 40px;">
+        <span style="color: var(--petronas-primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+            Catalogo Digital
+        </span>
+        <h1 style="font-size: 42px; font-weight: 800; margin: 12px 0; color: #ffffff;">
+            TIENDA DE VIDEOJUEGOS
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 16px; max-width: 500px; margin: 0 auto 24px auto;">
+            Adquiere claves digitales para tus juegos favoritos de forma rapida y segura.
+        </p>
+        <a href="/tienda" class="btn-petronas">Explorar Catalogo</a>
+    </section>
+
+    <section>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="font-size: 24px; color: #ffffff; border-left: 3px solid var(--petronas-primary); padding-left: 12px;">
+                Juegos Destacados
+            </h2>
+            <a href="/tienda" style="color: var(--petronas-primary); text-decoration: none; font-size: 13px; font-weight: 700;">Ver Todos</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+            {% for juego in juegos %}
+            <div class="game-card">
+                <div class="img-wrapper">
+                    <span class="badge-tag">{{ juego.genero }}</span>
+                    <img src="{{ juego.img }}" alt="{{ juego.nombre }}">
+                </div>
+                
+                <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3 style="margin: 0 0 4px 0; color: #ffffff; font-size: 18px;">{{ juego.nombre }}</h3>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">{{ juego.desarrollador }}</p>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+                        <div>
+                            <span style="font-size: 10px; color: var(--text-muted); display: block; text-transform: uppercase;">Precio</span>
+                            <span style="font-weight: 700; font-size: 18px; color: {% if juego.precio == 0 %}var(--petronas-primary){% else %}#ffffff{% endif %};">
+                                {% if juego.precio == 0 %}Gratis{% else %}${{ juego.precio }} USD{% endif %}
+                            </span>
+                        </div>
+                        <a href="/agregar_carrito/{{ juego.id }}" class="btn-petronas">Agregar</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

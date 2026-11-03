@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Categorías | PlayStart{% endblock %}
+
+{% block content %}
+<main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <h1 style="font-size: 32px; border-left: 5px solid #00d26a; padding-left: 15px; color: #fff;">Explora por Categorías</h1>
+    <p style="color: #8f9cae; margin-bottom: 30px;">Selecciona un género para ver todos los videojuegos correspondientes.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+        {% for cat in categorias %}
+        <a href="/categoria/{{ cat.nombre }}" style="text-decoration: none;">
+            <div style="background: #151922; border: 1px solid #1f2533; border-top: 4px solid {{ cat.color }}; border-radius: 8px; padding: 30px 20px; text-align: center; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#1f2533'" onmouseout="this.style.background='#151922'">
+                <div style="font-size: 40px; margin-bottom: 10px;">{{ cat.icono }}</div>
+                <h3 style="color: #fff; margin: 0; font-size: 20px;">{{ cat.nombre }}</h3>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

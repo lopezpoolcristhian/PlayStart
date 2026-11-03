@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PlayStart | F1 Tech Gaming Store{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.0">
+
+    <style>
+    
+        :root {
+            --bg-dark: #0b0e14;
+            --bg-card: #121721;
+            --petronas-primary: #00ffc3;
+            --petronas-hover: #00cca0;
+            --text-main: #f0f4f8;
+            --text-secondary: #8a99ad;
+            --border-subtle: rgba(0, 255, 195, 0.15);
+            --border-glow: rgba(0, 255, 195, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar Header */
+        .header-nav {
+            background: rgba(18, 23, 33, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .brand-logo span {
+            color: var(--petronas-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--petronas-primary);
+        }
+
+        /* User Controls & Actions */
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-cart {
+            border: 1px solid var(--border-subtle);
+            background: rgba(0, 255, 195, 0.05);
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: var(--petronas-primary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+        }
+
+        .btn-cart:hover {
+            border-color: var(--petronas-primary);
+            box-shadow: 0 0 12px var(--border-glow);
+        }
+
+        .user-tag {
+            color: var(--petronas-primary);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-login {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .btn-login:hover {
+            color: #ffffff;
+        }
+
+        .btn-register {
+            padding: 8px 18px;
+            background: var(--petronas-primary);
+            color: #0b0e14;
+            border-radius: 4px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-register:hover {
+            background: var(--petronas-hover);
+            box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);
+        }
+
+        .btn-logout {
+            color: #ff4655;
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Flash Notifications Container */
+        .flash-container {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .flash-msg {
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flash-success {
+            background: rgba(0, 255, 195, 0.1);
+            color: var(--petronas-primary);
+            border: 1px solid var(--border-glow);
+        }
+
+        .flash-danger, .flash-error {
+            background: rgba(255, 70, 85, 0.1);
+            color: #ff4655;
+            border: 1px solid rgba(255, 70, 85, 0.4);
+        }
+
+        .flash-info, .flash-warning {
+            background: rgba(255, 180, 0, 0.1);
+            color: #ffb400;
+            border: 1px solid rgba(255, 180, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            padding: 24px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header-nav">
+        <div style="display: flex; align-items: center; gap: 40px;">
+            <a href="/" class="brand-logo">PlayStart<span>.</span></a>
+            
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/tienda" class="nav-link">Tienda</a>
+                <a href="/categorias" class="nav-link">Categorías</a>
+                <a href="/ofertas" class="nav-link">Ofertas</a>
+                <a href="/soporte" class="nav-link">Soporte</a>
+                {% if session.get('admin_logged') %}<a href="/admin" class="nav-link">Administrar</a>{% else %}<a href="/admin/login" class="nav-link">Admin</a>{% endif %}
+            </nav>
+        </div>
+
+        <!-- User Controls -->
+        <div class="user-actions">
+            <a href="/carrito" class="btn-cart">
+                Carrito ({{ session.get('carrito')|length if session.get('carrito') else 0 }})
+            </a>
+
+            {% if session.get('username') %}
+                <span class="user-tag">{{ session.get('username') }}</span>
+                <a href="/logout" class="btn-logout">Cerrar Sesión</a>
+            {% else %}
+                <a href="/login" class="btn-login">Iniciar Sesión</a>
+                <a href="/registro" class="btn-register">Registrarse</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Contenedor de Alertas Flash de Flask -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-msg flash-{{ category }}">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Contenido Principal de las Vistas -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer Petronas Tech -->
+    <footer>
+        <p>&copy; 2026 PlayStart Interactive. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

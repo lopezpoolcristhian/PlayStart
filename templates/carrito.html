@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Carrito de Compras | PlayStart{% endblock %}
+
+{% block content %}
+<main style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <h1 style="font-size: 32px; color: #fff; border-left: 5px solid #00d26a; padding-left: 15px;">Tu Carrito 🛒✨</h1>
+
+    {% if carrito %}
+    <div style="background: #151922; border-radius: 10px; border: 1px solid #1f2533; padding: 25px; margin-top: 25px;">
+        {% for item in carrito %}
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2533; padding: 15px 0;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="{{ item.img }}" alt="{{ item.nombre }}" style="width: 80px; height: 55px; object-fit: cover; border-radius: 6px;">
+                <div>
+                    <h3 style="margin: 0 0 5px 0; color: #fff; font-size: 18px;">{{ item.nombre }}</h3>
+                    <span style="font-size: 12px; color: #00d26a; font-weight: bold;">{{ item.genero }}</span>
+                </div>
+            </div>
+            <span style="font-size: 20px; font-weight: bold; color: {% if item.precio == 0 %}#00d26a{% else %}#fff{% endif %};">
+                {% if item.precio == 0 %}Gratis{% else %}${{ item.precio }} USD{% endif %}
+            </span>
+        </div>
+        {% endfor %}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 2px solid #ff4655;">
+            <h2 style="color: #fff; margin: 0; font-size: 22px;">Total a Pagar:</h2>
+            <span style="font-size: 30px; font-weight: bold; color: #00d26a;">${{ total }} USD</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+            <a href="/vaciar_carrito" style="color: #ff4655; text-decoration: none; font-size: 14px; font-weight: bold;">Vaciar Carrito</a>
+            <form action="/checkout" method="POST">
+                <button type="submit" class="btn-kawaii" style="background: #00d26a; color: #000; padding: 14px 28px; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                    🚀 Confirmar Compra y Generar Claves
+                </button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 60px 0; color: #8f9cae;">
+        <p style="font-size: 40px; margin-bottom: 10px;">(⁠っ⁠.⁠4⁠)⁠っ</p>
+        <h2 style="color: #fff; font-size: 22px;">¡Tu carrito está vacío, uwu!</h2>
+        <p style="margin-bottom: 25px;">Agrega un videojuego para continuar.</p>
+        <a href="/tienda" style="background: #ff4655; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">Explorar Tienda</a>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}

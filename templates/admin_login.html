@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Acceso administrador | PlayStart{% endblock %}
+{% block content %}
+<main style="max-width:460px;margin:55px auto;padding:0 20px;">
+  <section style="background:#151922;border:1px solid #00ffc355;border-radius:12px;padding:30px;">
+    <p style="color:#00ffc3;font-size:12px;font-weight:800;letter-spacing:2px;">PLAYSTART / ZONA SEGURA</p>
+    <h1 style="color:#fff;margin:10px 0 24px;">Acceso de administrador</h1>
+    <form method="POST" style="display:grid;gap:16px;">
+      <label style="color:#cbd5e1;">Usuario<input name="usuario" required autocomplete="username" style="display:block;width:100%;margin-top:7px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;">Contraseña<input type="password" name="password" required autocomplete="current-password" style="display:block;width:100%;margin-top:7px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <button style="padding:13px;background:#00ffc3;border:0;border-radius:6px;font-weight:800;cursor:pointer;">Entrar al panel</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

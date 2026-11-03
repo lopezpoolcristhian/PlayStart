@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Editar videojuego | PlayStart{% endblock %}
+{% block content %}
+<main style="max-width:850px;margin:42px auto;padding:0 20px;color:#f0f4f8;">
+  <a href="{{ url_for('admin_panel') }}" style="color:#00ffc3;text-decoration:none;font-weight:700;">← Volver al panel</a>
+  <section style="margin-top:18px;background:#151922;border:1px solid #00ffc344;border-radius:12px;padding:26px;">
+    <p style="color:#00ffc3;font-size:12px;font-weight:800;letter-spacing:2px;">PLAYSTART / CONTROL</p>
+    <h1 style="font-size:29px;margin:5px 0 22px;">Editar videojuego</h1>
+    <form method="POST" action="{{ url_for('admin_editar', game_id=juego.id) }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;">
+      <label style="color:#cbd5e1;font-size:13px;">Nombre<input name="nombre" required maxlength="100" value="{{ juego.nombre }}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;">Género<select name="genero" required style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;">
+        {% if juego.genero not in generos %}<option value="{{ juego.genero }}" selected>{{ juego.genero }} (actual)</option>{% endif %}
+        {% for genero_opcion in generos %}<option value="{{ genero_opcion }}" {% if juego.genero == genero_opcion %}selected{% endif %}>{{ genero_opcion }}</option>{% endfor %}
+      </select></label>
+      <label style="color:#cbd5e1;font-size:13px;">Desarrolladora<input name="dev" required maxlength="100" value="{{ juego.dev }}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;">Precio (USD)<input name="precio" type="number" min="0" step="0.01" required value="{{ '%.2f'|format(juego.precio) }}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;grid-column:1/-1;">URL de imagen<input name="img" type="url" required value="{{ juego.img }}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <div style="grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:5px;">
+        <button type="submit" style="padding:13px 20px;background:#00ffc3;color:#07110f;border:0;border-radius:6px;font-weight:900;cursor:pointer;">Guardar cambios</button>
+        <a href="{{ url_for('admin_panel') }}" style="color:#aab6c7;text-decoration:none;padding:12px;">Cancelar</a>
+      </div>
+    </form>
+    <div style="margin-top:22px;padding:14px;background:#0b0e14;border-radius:8px;">
+      <p style="color:#8a99ad;font-size:12px;margin:0 0 10px;">Vista previa de la imagen actual</p>
+      <img src="{{ juego.img }}" alt="Vista previa de {{ juego.nombre }}" style="max-width:260px;width:100%;max-height:150px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+    </div>
+  </section>
+</main>
+{% endblock %}

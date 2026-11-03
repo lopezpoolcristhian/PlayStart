@@ -1,0 +1,40 @@
+PLAYSTART - VERSION MONGODB ATLAS
+
+1) Conserva tu carpeta original como respaldo.
+2) Copia el contenido de esta carpeta a tu proyecto PlayStart (o usa esta carpeta como proyecto nuevo).
+3) Crea un archivo llamado .env en la misma carpeta que app.py. No lo subas a GitHub.
+   Ejemplo:
+   MONGO_URI=TU_URI_REAL_DE_ATLAS
+   MONGO_DB=playstart
+   SECRET_KEY=UNA_CLAVE_ALEATORIA_LARGA_Y_PRIVADA
+   ADMIN_USER=admin
+   ADMIN_PASSWORD=UNA_CONTRASENA_LARGA_Y_UNICA
+4) Instala dependencias desde la terminal de VS Code:
+   python -m pip install -r requirements.txt
+5) Ejecuta localmente:
+   python app.py
+6) Abre http://127.0.0.1:5000
+7) Panel administrador: http://127.0.0.1:5000/admin/login
+
+MIGRACION:
+- Si playstart.db está junto a app.py, la primera conexión a Atlas importa usuarios y compras antiguas una sola vez.
+- Los 20 videojuegos iniciales se crean en la colección productos con imágenes remotas.
+- No borres playstart.db hasta comprobar que tus usuarios y compras aparecen correctamente en MongoDB.
+- Una vez verificada la migración, puedes conservar la copia de respaldo y evitar subir playstart.db a GitHub.
+
+COLECCIONES:
+- productos
+- usuarios
+- compras
+- sistema (marca de migración)
+
+RENDER:
+- Build Command: pip install -r requirements.txt
+- Start Command: gunicorn app:app
+- Environment Variables: MONGO_URI, MONGO_DB=playstart, SECRET_KEY, ADMIN_USER, ADMIN_PASSWORD
+- Configura también Network Access en Atlas para permitir conexiones desde Render.
+
+SEGURIDAD:
+- No compartas MONGO_URI, SECRET_KEY ni ADMIN_PASSWORD.
+- No subas .env a GitHub.
+- Cambia cualquier contraseña de ejemplo por una propia, larga y única.

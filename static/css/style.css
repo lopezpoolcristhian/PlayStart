@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+:root {
+    --bg-dark: #090c10;
+    --bg-surface: #111620;
+    --bg-card: #161c28;
+    --border-subtle: #20293a;
+    --border-accent: #00ffc3;
+    
+    /* Paleta Petronas Turquesa */
+    --petronas-primary: #00ffc3;
+    --petronas-dark: #00b388;
+    --petronas-glow: rgba(0, 255, 195, 0.25);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+h1, h2, h3, .brand-logo {
+    font-family: 'Syne', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* Base Layout */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* =========================================================
+   TARJETAS DE JUEGO (Contenedor principal)
+   ========================================================= */
+.game-card {
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    overflow: hidden !important; /* Vital: oculta cualquier elemento que intente salirse */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--petronas-primary);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--petronas-glow);
+}
+
+/* =========================================================
+   CONTENEDOR DE LA IMAGEN (Marco vertical tipo póster)
+   ========================================================= */
+.game-card .img-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 320px !important;     /* Altura fija y uniforme para todas las portadas */
+    overflow: hidden !important;  /* Bloquea el desbordamiento de la imagen */
+    background: #000;
+}
+
+/* =========================================================
+   IMAGEN AJUSTADA AL MARCO
+   ========================================================= */
+.game-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;     /* Rellena el marco recortando los extremos con elegancia sin deformar */
+    object-position: center !important;
+    display: block !important;
+}
+
+.game-card:hover img {
+    transform: scale(1.05);
+}
+
+/* =========================================================
+   BADGES Y ETIQUETAS
+   ========================================================= */
+.badge-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(9, 12, 16, 0.9);
+    border: 1px solid var(--petronas-primary);
+    color: var(--petronas-primary);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+}
+
+/* =========================================================
+   BOTONES PETRONAS
+   ========================================================= */
+.btn-petronas {
+    background: var(--petronas-primary);
+    color: #090c10;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.btn-petronas:hover {
+    background: #52ffd8;
+    box-shadow: 0 0 15px var(--petronas-glow);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--petronas-primary);
+    border: 1px solid var(--petronas-primary);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: var(--petronas-primary);
+    color: #090c10;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: 40px 0;
+    margin-top: 80px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+}

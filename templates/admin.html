@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Administración | PlayStart{% endblock %}
+{% block content %}
+<main style="max-width:1180px;margin:38px auto;padding:0 20px;color:#f0f4f8;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:25px;">
+    <div><p style="color:#00ffc3;font-size:12px;font-weight:800;letter-spacing:2px;">PLAYSTART / CONTROL</p><h1 style="font-size:32px;margin:5px 0;">Panel de administración</h1><p style="color:#8a99ad;">Añade, edita o elimina videojuegos del catálogo.</p></div>
+    <a href="{{ url_for('admin_logout') }}" style="color:#ff6975;text-decoration:none;font-weight:700;">Cerrar sesión admin ↗</a>
+  </div>
+  <section style="background:#151922;border:1px solid #00ffc344;border-radius:12px;padding:24px;margin-bottom:28px;">
+    <h2 style="margin:0 0 18px;color:#00ffc3;font-size:21px;">＋ Añadir videojuego</h2>
+    <form method="POST" action="{{ url_for('admin_agregar') }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;">
+      <label style="color:#cbd5e1;font-size:13px;">Nombre<input name="nombre" required maxlength="100" placeholder="Ej. Hades II" style="display:block;width:100%;margin-top:6px;padding:11px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;">Género<select name="genero" required style="display:block;width:100%;margin-top:6px;padding:11px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;">
+        <option value="" disabled selected>Selecciona un género</option>
+        {% for genero_opcion in generos %}<option value="{{ genero_opcion }}">{{ genero_opcion }}</option>{% endfor %}
+      </select></label>
+      <label style="color:#cbd5e1;font-size:13px;">Desarrolladora<input name="dev" required maxlength="100" placeholder="Ej. Supergiant Games" style="display:block;width:100%;margin-top:6px;padding:11px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;">Precio (USD)<input name="precio" type="number" min="0" step="0.01" required placeholder="19.99" style="display:block;width:100%;margin-top:6px;padding:11px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <label style="color:#cbd5e1;font-size:13px;grid-column:1/-1;">URL de imagen (https://...)<input name="img" type="url" required placeholder="https://sitio.com/portada.jpg" style="display:block;width:100%;margin-top:6px;padding:11px;background:#0b0e14;border:1px solid #30394a;border-radius:6px;color:white;"></label>
+      <button style="grid-column:1/-1;padding:13px;background:#00ffc3;color:#07110f;border:0;border-radius:6px;font-weight:900;cursor:pointer;">Guardar videojuego en MongoDB</button>
+    </form>
+    <p style="color:#8a99ad;font-size:12px;margin:12px 0 0;">La imagen debe ser una dirección pública que termine en un formato de imagen o que el servidor permita mostrar.</p>
+  </section>
+  <section style="background:#151922;border:1px solid #30394a;border-radius:12px;padding:22px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px;"><h2 style="margin:0;font-size:21px;">Catálogo actual</h2><span style="color:#00ffc3;font-weight:800;">{{ juegos|length }} videojuegos</span></div>
+    {% if juegos %}
+    <div style="display:grid;gap:12px;">
+      {% for juego in juegos %}
+      <div style="display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;background:#0d121b;border:1px solid #273143;border-radius:8px;">
+        <img src="{{ juego.img }}" alt="{{ juego.nombre }}" style="width:76px;height:54px;object-fit:cover;border-radius:5px;background:#202938;" onerror="this.style.opacity='.25'">
+        <div style="min-width:0;"><strong style="display:block;color:#fff;overflow-wrap:anywhere;">{{ juego.nombre }}</strong><span style="font-size:12px;color:#8a99ad;">{{ juego.genero }} · {{ juego.dev }} · {% if juego.precio == 0 %}Gratis{% else %}${{ '%.2f'|format(juego.precio) }} USD{% endif %}</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+          <a href="{{ url_for('admin_editar', game_id=juego.id) }}" style="display:inline-block;padding:9px 12px;background:#123b43;color:#00ffc3;border:1px solid #176b70;border-radius:6px;font-weight:800;text-decoration:none;">Editar</a>
+          <form method="POST" action="{{ url_for('admin_eliminar', game_id=juego.id) }}" onsubmit="return confirm('¿Seguro que deseas eliminar {{ juego.nombre|e }}?');"><button style="padding:9px 12px;background:#421d27;color:#ff7b86;border:1px solid #71313e;border-radius:6px;font-weight:800;cursor:pointer;">Eliminar</button></form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}<p style="color:#8a99ad;">Todavía no hay videojuegos registrados.</p>{% endif %}
+  </section>
+</main>
+{% endblock %}

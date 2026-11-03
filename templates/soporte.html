@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Centro de Soporte | PlayStart{% endblock %}
+
+{% block content %}
+<main style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h1 style="font-size: 36px; color: #fff; margin-bottom: 10px;">¿En qué podemos ayudarte?</h1>
+        <p style="color: #8f9cae; font-size: 16px;">Centro de ayuda y atención al cliente de PlayStart.</p>
+    </div>
+
+    <!-- Preguntas Frecuentes -->
+    <section style="background: #151922; border: 1px solid #1f2533; border-radius: 10px; padding: 30px; margin-bottom: 40px;">
+        <h2 style="font-size: 20px; color: #00d26a; margin-top: 0; margin-bottom: 20px;">Preguntas Frecuentes</h2>
+        
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: #fff; font-size: 16px; margin-bottom: 5px;">¿Cómo recibo mis videojuegos tras la compra?</h3>
+            <p style="color: #8f9cae; font-size: 14px; margin: 0;">Al completar la transacción, el código de activación digital o enlace de descarga aparecerá de inmediato en tu panel de usuario.</p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: #fff; font-size: 16px; margin-bottom: 5px;">¿Cuáles son las formas de pago aceptadas?</h3>
+            <p style="color: #8f9cae; font-size: 14px; margin: 0;">Aceptamos pagos con tarjetas de débito/crédito, transferencias bancarias y depósitos en efectivo.</p>
+        </div>
+
+        <div>
+            <h3 style="color: #fff; font-size: 16px; margin-bottom: 5px;">¿Qué hago si tengo problemas con una clave?</h3>
+            <p style="color: #8f9cae; font-size: 14px; margin: 0;">Puedes llenar el formulario de contacto que está aquí abajo y nuestro equipo de soporte te responderá a la brevedad.</p>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section style="background: #151922; border: 1px solid #1f2533; border-radius: 10px; padding: 30px;">
+        <h2 style="font-size: 20px; color: #ff4655; margin-top: 0; margin-bottom: 20px;">Enviar un Ticket de Soporte</h2>
+        
+        <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <label style="display: block; color: #c1c7d0; font-size: 13px; margin-bottom: 5px;">Tu Nombre</label>
+                    <input type="text" placeholder="Ej. Juan Pérez" required style="width: 100%; padding: 10px; background: #1f2533; border: 1px solid #2a3245; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <label style="display: block; color: #c1c7d0; font-size: 13px; margin-bottom: 5px;">Correo de Contacto</label>
+                    <input type="email" placeholder="correo@ejemplo.com" required style="width: 100%; padding: 10px; background: #1f2533; border: 1px solid #2a3245; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                </div>
+            </div>
+
+            <div>
+                <label style="display: block; color: #c1c7d0; font-size: 13px; margin-bottom: 5px;">Asunto</label>
+                <input type="text" placeholder="Ej. Problema con compra" required style="width: 100%; padding: 10px; background: #1f2533; border: 1px solid #2a3245; color: #fff; border-radius: 5px; box-sizing: border-box;">
+            </div>
+
+            <div>
+                <label style="display: block; color: #c1c7d0; font-size: 13px; margin-bottom: 5px;">Mensaje</label>
+                <textarea rows="5" placeholder="Describe tu problema con detalle..." required style="width: 100%; padding: 10px; background: #1f2533; border: 1px solid #2a3245; color: #fff; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" style="background: #00d26a; color: #000; padding: 12px 24px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; align-self: flex-start;">Enviar Mensaje</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio | PlayStart{% endblock %}
+
+{% block content %}
+<main>
+    <!-- Sección Banner -->
+    <section class="hero" style="padding: 40px 20px; text-align: center; background: #11141c;">
+        <div class="hero-content">
+            <p class="hero-label" style="color: #ff4655; font-weight: bold; letter-spacing: 1px;">PLAYSTART</p>
+            <h1 style="font-size: 32px; margin: 10px 0;">Descubre tu próximo videojuego.</h1>
+            <p class="hero-description" style="color: #8f9cae;">
+                Explora videojuegos, descubre nuevos títulos y encuentra experiencias para cada tipo de jugador.
+            </p>
+        </div>
+    </section>
+
+    <!-- Catálogo Principal (10 Juegos) -->
+    <section id="catalogo" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <h2 style="font-size: 24px; margin-bottom: 20px; border-left: 4px solid #00d26a; padding-left: 10px; color: #ffffff;">Catálogo Destacado</h2>
+
+        <div class="games-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+
+            <!-- 1. Minecraft -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Minecraft</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">Sandbox / Supervivencia</p>
+                    <p style="font-size: 12px; color: #8f9cae;">Mojang Studios</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$29.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 2. Genshin Impact -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Genshin Impact</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">ARPG / Mundo Abierto</p>
+                    <p style="font-size: 12px; color: #8f9cae;">HoYoverse</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #00d26a;">Gratis</span>
+                    <button class="button button-primary" style="background: #00d26a; color: #000; border: none; padding: 8px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Obtener</button>
+                </div>
+            </div>
+
+            <!-- 3. Left 4 Dead 2 -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Left 4 Dead 2</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">FPS / Terror Cooperativo</p>
+                    <p style="font-size: 12px; color: #8f9cae;">Valve</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$9.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 4. Grand Theft Auto V -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Grand Theft Auto V</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">Acción / Mundo Abierto</p>
+                    <p style="font-size: 12px; color: #8f9cae;">Rockstar Games</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$29.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 5. The Witcher 3 -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">The Witcher 3</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">RPG / Fantasía</p>
+                    <p style="font-size: 12px; color: #8f9cae;">CD PROJEKT RED</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$39.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 6. Red Dead Redemption 2 -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Red Dead Redemption 2</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">Acción / Aventura</p>
+                    <p style="font-size: 12px; color: #8f9cae;">Rockstar Games</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$59.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 7. Cyberpunk 2077 -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Cyberpunk 2077</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">RPG / Sci-Fi</p>
+                    <p style="font-size: 12px; color: #8f9cae;">CD PROJEKT RED</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$59.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 8. Elden Ring -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Elden Ring</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">ARPG / Souls-like</p>
+                    <p style="font-size: 12px; color: #8f9cae;">FromSoftware</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$59.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 9. Stardew Valley -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Stardew Valley</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">Simulación / RPG</p>
+                    <p style="font-size: 12px; color: #8f9cae;">ConcernedApe</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$14.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+            <!-- 10. Terraria -->
+            <div class="game-card" style="background: #151922; border-radius: 8px; padding: 15px; border: 1px solid #1f2533; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin-bottom: 5px; color: #fff;">Terraria</h3>
+                    <p style="font-size: 13px; color: #00d26a; font-weight: bold;">Sandbox / Aventura 2D</p>
+                    <p style="font-size: 12px; color: #8f9cae;">Re-Logic</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #fff;">$9.99 USD</span>
+                    <button class="button button-primary" style="background: #ff4655; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Comprar</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+{% endblock %}

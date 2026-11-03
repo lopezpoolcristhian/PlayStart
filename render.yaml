@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: playstart
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB
+        value: playstart
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
