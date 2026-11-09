@@ -2,6 +2,7 @@ import os
 import random
 import string
 import sqlite3
+import time
 from functools import wraps
 from urllib.parse import urlparse
 
@@ -179,20 +180,62 @@ def ver_categoria(nombre_genero):
     return render_template("categoria_detalle.html", genero=nombre_genero, juegos=juegos)
 
 
-@app.route("/ofertas")
-def ofertas():
-    nombres_oferta = ["Left 4 Dead 2", "The Witcher 3", "Grand Theft Auto V", "Cyberpunk 2077"]
-    descuentos = {"Left 4 Dead 2": 0.80, "The Witcher 3": 0.80, "Grand Theft Auto V": 0.50, "Cyberpunk 2077": 0.50}
+# Cada grupo dura 24 horas. El cambio se calcula con el reloj del servidor,
+# por lo que todos los visitantes ven las mismas ofertas.
+OFERTAS_PROGRAMADAS = [
+    {"Left 4 Dead 2": 0.80, "The Witcher 3": 0.80, "Grand Theft Auto V": 0.50, "Cyberpunk 2077": 0.50},
+    {"Red Dead Redemption 2": 0.40, "Elden Ring": 0.35, "Minecraft": 0.20, "Resident Evil 4 Remake": 0.45},
+    {"Stardew Valley": 0.30, "Terraria": 0.25, "Among Us": 0.40, "Hollow Knight": 0.35},
+]
+
+def obtener_ofertas_activas():
+    ciclo_segundos = 24 * 60 * 60
+    ahora = int(time.time())
+    ciclo_actual = ahora // ciclo_segundos
+    segundos_restantes = ciclo_segundos - (ahora % ciclo_segundos)
+    descuentos = OFERTAS_PROGRAMADAS[ciclo_actual % len(OFERTAS_PROGRAMADAS)]
+
     ofertas_lista = []
-    for nombre in nombres_oferta:
+    for nombre, descuento in descuentos.items():
         juego = productos_col.find_one({"nombre": nombre})
         if juego:
             original = float(juego.get("precio", 0))
-            descuento = descuentos[nombre]
-            ofertas_lista.append({"nombre": nombre, "genero": juego.get("genero", ""), "precio_orig": original,
-                                  "precio": round(original * (1 - descuento), 2), "descuento": f"-{int(descuento*100)}%",
-                                  "img": juego.get("img", ""), "id": str(juego["_id"])})
-    return render_template("ofertas.html", ofertas=ofertas_lista)
+            ofertas_lista.append({
+                "nombre": nombre,
+                "genero": juego.get("genero", ""),
+                "precio_orig": original,
+                "precio": round(original * (1 - descuento), 2),
+                "descuento": f"-{int(descuento * 100)}%",
+                "img": juego.get("img", ""),
+                "id": str(juego["_id"]),
+            })
+    return ofertas_lista, segundos_restantes
+
+
+@app.route("/ofertas")
+def ofertas():
+    ofertas_lista, segundos_restantes = obtener_ofertas_activas()
+    return render_template("ofertas.html", ofertas=ofertas_lista, segundos_restantes=segundos_restantes)
+
+
+@app.route("/agregar_carrito_oferta/<game_id>")
+def agregar_carrito_oferta(game_id):
+    ofertas_lista, _ = obtener_ofertas_activas()
+    oferta = next((item for item in ofertas_lista if item["id"] == game_id), None)
+    if oferta:
+        carrito = session.get("carrito", [])
+        carrito.append({
+            "id": oferta["id"],
+            "nombre": oferta["nombre"],
+            "genero": oferta["genero"],
+            "precio": oferta["precio"],
+            "img": oferta["img"],
+        })
+        session["carrito"] = carrito
+        flash(f"{oferta['nombre']} añadido al carrito con su precio de oferta.", "success")
+    else:
+        flash("Esta oferta ya terminó. Revisa las nuevas ofertas disponibles.", "warning")
+    return redirect(url_for("ofertas"))
 
 
 @app.route("/soporte")
